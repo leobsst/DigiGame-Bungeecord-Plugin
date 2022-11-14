@@ -1,0 +1,15 @@
+name: Digigame
+version: '${project.version}'
+main: org.leobsst.digigame.digigame.Digigame
+api-version: 1.19
+authors: [ LEOBSST ]
+description: Let players switch server between survival and creative
+website: https://www.leobsst.fr
+commands:
+  build:
+    description: Switch to build server
+    usage: /build
+  survie:
+    description: Switch to survival server
+    usage: /survie
+
