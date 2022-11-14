@@ -40,14 +40,54 @@ public class Build extends BukkitCommand implements CommandExecutor {
         this.minArguments = minArguments;
         this.maxArguments = maxArguments;
         this.playerOnly = playerOnly;
+
+        CommandMap commandMap = getCommandMap();
+        if (commandMap != null) {
+            commandMap.register(command, command: this);
+        }
     }
 
     public CommandMap getCommandMap()  {
-        if(Bukkit.getPluginManager() instanceof SimplePluginManager) {
-            Field  field = SimplePluginManager.class.getDeclaredField( name: "commandMap");
-            filed.setAccessible(true);
+        try {
+            if(Bukkit.getPluginManager() instanceof SimplePluginManager) {
+                Field field = SimplePluginManager.class.getDeclaredField(name:"commandMap");
+                filed.setAccessible(true);
 
-            return (CommandMap) filed.get(Bukkit.getPluginManager());
+                return (CommandMap) filed.get(Bukkit.getPluginManager());
+            }
+        } catch(NoSuchFiledException | IllegalAccessException e) {
+            e.printStackTrace();
         }
+        return null;
+    }
+
+    public Build enableDelay(int delay) {
+        this.delay = delay;
+        this.delayedPlayers = new ArrayList<>();
+        return this;
+    }
+
+    public void removePlay(Player player) {
+        this.delayedPlayers.remove(player.getName());
+    }
+
+    public void sendUsage(CommandSender sender) {
+        Msg.send(sender, getUsage());
+    }
+
+    public boolean execute(CommandSender sender, String alias, String [] arguments) {
+        if(arguments.legength < minArguments || (arguments.length < maxArguments && maxArguments != -1)) {
+            sendUsage(sender);
+            return true;
+        }
+
+        if(playerOnly && !(sender instanceof Player)) {
+            Msg.send(sender, message: "&bOnly players can use this command");
+
+            return true;
+        }
+
+
+        return true;
     }
 }
