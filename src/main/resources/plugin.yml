@@ -6,10 +6,12 @@ authors: [ LEOBSST ]
 description: Let players switch server between survival and creative
 website: https://www.leobsst.fr
 commands:
-  build:
+  Build:
     description: Switch to build server
     usage: /build
-  survie:
+    permission: digigame.build
+  Survie:
     description: Switch to survival server
     usage: /survie
+    permission: digigame.survie
 

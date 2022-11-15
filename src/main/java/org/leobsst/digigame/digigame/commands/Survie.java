@@ -6,10 +6,10 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.CommandSender;
 
-public class Build extends Command {
+public class Survie extends Command {
 
-    public Build() {
-        super("Build");
+    public Survie() {
+        super("Survie");
     }
 
     @Override
@@ -21,8 +21,8 @@ public class Build extends Command {
             if(args.length > 0) {
                 player.sendMessage(new ComponentBuilder("§6Commande incorrecte").create());
             } else {
-                player.sendMessage(new ComponentBuilder("§bTéléportation au serveur build").create());
-                player.connect(ProxyServer.getInstance().getServerInfo("build"));
+                player.sendMessage(new ComponentBuilder("§bTéléportation au serveur survie").create());
+                player.connect(ProxyServer.getInstance().getServerInfo("survie"));
             }
         }
     }

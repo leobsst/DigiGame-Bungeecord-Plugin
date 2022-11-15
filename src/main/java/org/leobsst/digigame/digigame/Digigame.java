@@ -1,21 +1,21 @@
 package org.leobsst.digigame.digigame;
 
-import org.bukkit.Bukkit;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
-import org.bukkit.plugin.java.JavaPlugin;
+import net.md_5.bungee.api.plugin.Plugin;
+import org.leobsst.digigame.digigame.commands.Build;
+import org.leobsst.digigame.digigame.commands.Survie;
 
-public final class Digigame extends JavaPlugin {
+public final class Digigame extends Plugin {
+
     private static Digigame instance;
 
     @Override
-    public void onEnable() {
+    public void onEnable(){
         instance = this;
-        System.out.println("§b Digigame plugin started");
-        getCommand( name: "build");
-    }
 
-    @Override
-    public void onDisable() { System.out.println("§b Digigame plugin stopped"); }
+        getLogger().info("§6Plugin DigiGame has started");
+        getProxy().getPluginManager().registerCommand(this, new Build());
+        getProxy().getPluginManager().registerCommand(this, new Survie() );
+    }
 
     public static Digigame getInstance() {
         return instance;
